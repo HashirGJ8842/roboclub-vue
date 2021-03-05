@@ -2,6 +2,7 @@ import firebase from 'firebase/app'
 import firebaseConfig from '~/firebaseconfig'
 import 'firebase/auth'
 import 'firebase/database'
+import 'firebase/firestore'
 import 'firebase/functions'
 
 if (!firebaseConfig) {
@@ -13,6 +14,7 @@ if (!firebase.apps.length) {
 }
 
 export const db = firebase.database()
+export const firestoredb = firebase.firestore()
 
 export default function ({ store }, inject) {
   inject('firebase', firebase)
