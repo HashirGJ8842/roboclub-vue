@@ -1,8 +1,8 @@
 import { firestoreAction } from 'vuexfire'
-import { firestoreDb } from '@/plugins/firebase'
+import { DB } from '@/plugins/firebase'
 
 const RECENT_NEWS_SIZE = 5
-const newsCollection = firestoreDb.collection('news')
+const newsCollection = DB.collection('news')
 const recentNewsCollection = newsCollection.orderBy('timestamp').limit(5)
 
 function clearNews(news) {
@@ -50,8 +50,8 @@ export const actions = {
     return bindFirestoreRef('news', recentNewsCollection)
   }),
 
-  deleteNews: (_, newsDelete) => {
-    newsCollection.doc(newsDelete.id).delete()
+  deleteNews: (_, id) => {
+    newsCollection.doc(id).delete()
   },
 
   addNews: ({ state, commit }) => {

@@ -168,7 +168,7 @@ export default {
       this.$emit('update:selectedToEdit', null)
     },
     deleteNewsItem() {
-      this.deleteNews(this.selectedToDelete)
+      this.deleteNews(this.selectedToDelete.id)
       this.$emit('update:selectedToDelete', null)
     },
     ...mapActions('news', ['addNews', 'saveNews', 'deleteNews'])
