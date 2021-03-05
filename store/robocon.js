@@ -1,14 +1,14 @@
-import { firebaseAction } from 'vuexfire'
-import { db } from '@/plugins/firebase'
+import { firestoreAction } from 'vuexfire'
+import { firestoreDb } from '@/plugins/firebase'
 
-const roboconRef = db.ref('robocon/current')
+const roboconRef = firestoreDb.collection('robocon').doc('current')
 
 export const state = () => ({
   robocon: {}
 })
 
 export const actions = {
-  setRoboconRef: firebaseAction(({ bindFirebaseRef }) => {
-    return bindFirebaseRef('robocon', roboconRef)
+  setRoboconRef: firestoreAction(({ bindFirestoreRef }) => {
+    return bindFirestoreRef('robocon', roboconRef)
   })
 }
