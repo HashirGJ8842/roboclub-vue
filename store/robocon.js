@@ -1,7 +1,7 @@
 import { firestoreAction } from 'vuexfire'
-import { firestoreDb } from '@/plugins/firebase'
+import { DB } from '@/plugins/firebase'
 
-const roboconRef = firestoreDb.collection('robocon').doc('current')
+const roboconRef = DB.collection('robocon').doc('current')
 
 export const state = () => ({
   robocon: {}
