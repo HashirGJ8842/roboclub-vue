@@ -13,6 +13,7 @@ if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig)
 }
 
+export const db = firebase.database()
 export const DB = firebase.firestore()
 
 export default function ({ store }, inject) {
