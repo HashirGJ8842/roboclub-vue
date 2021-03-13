@@ -30,12 +30,16 @@ export const actions = {
     }
     const user = state.user
     const ref = user ? user.uid : ''
-    const snapshot = await firebase
-      .firestore()
-      .collection('users')
-      .doc(ref)
-      .get()
-    commit('setAdmin', snapshot.data().isAdmin)
+    try {
+      const snapshot = await firebase
+        .firestore()
+        .collection('users')
+        .doc(ref)
+        .get()
+      commit('setAdmin', snapshot.data().isAdmin)
+    } catch {
+      commit('setAdmin', false)
+    }
   },
   logout: () => firebase.auth().signOut()
 }
