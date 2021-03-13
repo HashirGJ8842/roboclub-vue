@@ -1,6 +1,7 @@
 import firebase from 'firebase/app'
 import 'firebase/database'
 import 'firebase/auth'
+import 'firebase/firestore'
 import { firebaseMutations, vuexfireMutations } from 'vuexfire'
 
 export const strict = false
@@ -29,15 +30,12 @@ export const actions = {
     }
     const user = state.user
     const ref = user ? user.uid : ''
-    try {
-      const snapshot = await firebase
-        .database()
-        .ref('admins/' + ref)
-        .once('value')
-      commit('setAdmin', snapshot.val())
-    } catch {
-      commit('setAdmin', false)
-    }
+    const snapshot = await firebase
+      .firestore()
+      .collection('users')
+      .doc(ref)
+      .get()
+    commit('setAdmin', snapshot.data().isAdmin)
   },
   logout: () => firebase.auth().signOut()
 }
